@@ -100,6 +100,7 @@ app.get('/search/issues/:query', cors(corsOptions), async (req, res) => {
     }
 });
 
+// CLI message displayed when server is intialized
 app.listen(PORT, () => {
     console.log(`Proxy app listening at http://localhost:${PORT}`);
 });
