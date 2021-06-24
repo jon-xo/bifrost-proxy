@@ -22,12 +22,14 @@ const apiCvKey = process.env.REACT_APP_COMIC_API_KEY;
 // This function runs if the http://localhost:5000/current endpoint
 // receives a HTTP GET request. API returns list of this week's
 // comic releases.
-app.get('/current', cors(corsOptions), async (req, res) => {
+app.get('/api/current', cors(corsOptions), async (req, res) => {
     try {
     const fetchOptions = {
         method: 'GET',
         headers: {
-            Connection: 'keep-alive'
+            Connection: 'keep-alive',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         },
         referrerPolicy: 'same-origin'
     }
@@ -42,7 +44,7 @@ app.get('/current', cors(corsOptions), async (req, res) => {
 // This function runs if the http://localhost:5000/upcoming endpoint
 // receives a HTTP GET request. API returns list of next week's
 // comic releases.
-app.get('/upcoming', cors(corsOptions), async (req, res) => {
+app.get('/api/upcoming', cors(corsOptions), async (req, res) => {
     try {
     const fetchOptions = {
         method: 'GET',
@@ -64,7 +66,7 @@ app.get('/upcoming', cors(corsOptions), async (req, res) => {
 // This function runs if the http://localhost:5000/previous endpoint
 // receives a HTTP GET request. API returns list of last week's
 // comic releases.
-app.get('/previous', cors(corsOptions), async (req, res) => {
+app.get('/api/previous', cors(corsOptions), async (req, res) => {
     try {
     const fetchOptions = {
         method: 'GET',
@@ -83,7 +85,7 @@ app.get('/previous', cors(corsOptions), async (req, res) => {
     }
 });
 
-app.get('/search/issues/:query', cors(corsOptions), async (req, res) => {
+app.get('/api/search/issues/:query', cors(corsOptions), async (req, res) => {
     try {
     const fetchOptions = {
         method: 'GET',
