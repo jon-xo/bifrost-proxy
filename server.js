@@ -7,10 +7,10 @@ const fetch = require('node-fetch');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
-const corsOptions = {
-    origin: "*"
-};
+// app.use(cors());
+// const corsOptions = {
+//     origin: "*"
+// };
 
 const getFetchOptions = {
     method: 'GET',
@@ -46,7 +46,7 @@ app.get('/api/current', async (req, res) => {
 // This function runs if the http://localhost:5000/upcoming endpoint
 // receives a HTTP GET request. API returns list of next week's
 // comic releases.
-app.get('/api/upcoming', cors(corsOptions), async (req, res) => {
+app.get('/api/upcoming', async (req, res) => {
     try {
     const response = await fetch(`${requestEndpoint}/future`, getFetchOptions);
     const jsonResponse = await response.json();
@@ -69,16 +69,16 @@ app.get('/api/previous', async (req, res) => {
     }
 });
 
-app.get('/api/search/issues/:query', cors(corsOptions), async (req, res) => {
+app.get('/api/search/issues/:query', async (req, res) => {
     try {
-    const fetchOptions = {
-        method: 'GET',
-        headers: {
-            Connection: 'keep-alive'
-        },
-        referrerPolicy: 'same-origin'
-    }
-    const response = await fetch(`${searchEndpoint}/issues/?api_key=${apiCvKey}&filter=name:${req.params.query}&format=json`, fetchOptions);
+    // const fetchOptions = {
+    //     method: 'GET',
+    //     headers: {
+    //         Connection: 'keep-alive'
+    //     },
+    //     referrerPolicy: 'same-origin'
+    // }
+    const response = await fetch(`${searchEndpoint}/issues/?api_key=${apiCvKey}&filter=name:${req.params.query}&format=json`, getFetchOptions);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
