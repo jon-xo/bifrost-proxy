@@ -22,7 +22,7 @@ const apiCvKey = process.env.REACT_APP_COMIC_API_KEY;
 // This function runs if the http://localhost:5000/current endpoint
 // receives a HTTP GET request. API returns list of this week's
 // comic releases.
-app.get('/api/current', cors(corsOptions), async (req, res) => {
+app.get('/api/current', async (req, res) => {
     try {
     const fetchOptions = {
         method: 'GET',
