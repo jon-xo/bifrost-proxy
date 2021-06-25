@@ -24,16 +24,16 @@ const apiCvKey = process.env.REACT_APP_COMIC_API_KEY;
 // comic releases.
 app.get('/api/current', async (req, res) => {
     try {
-    const fetchOptions = {
-        method: 'GET',
-        headers: {
-            Connection: 'keep-alive',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-        },
-        // referrerPolicy: 'same-origin'
-    }
-    const response = await fetch(`${requestEndpoint}/new`, fetchOptions);
+    // const fetchOptions = {
+    //     method: 'GET',
+    //     headers: {
+    //         Connection: 'keep-alive',
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+    //     },
+    //     referrerPolicy: 'same-origin'
+    // }
+    const response = await fetch(`${requestEndpoint}/new`);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
