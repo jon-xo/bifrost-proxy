@@ -7,10 +7,10 @@ const fetch = require('node-fetch');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// app.use(cors());
-// const corsOptions = {
-//     origin: "*"
-// };
+app.use(cors());
+const corsOptions = {
+    origin: "*"
+};
 
 const getFetchOptions = {
     method: 'GET',
@@ -69,7 +69,7 @@ app.get('/api/previous', async (req, res) => {
     }
 });
 
-app.get('/api/search/issues/:query', async (req, res) => {
+app.get('/api/search/issues/:query', cors(corsOptions), async (req, res) => {
     try {
     // const fetchOptions = {
     //     method: 'GET',
