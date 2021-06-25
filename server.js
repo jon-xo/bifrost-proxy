@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors());
 const corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "*"
 };
 
 // Comic Release API Endpoint
@@ -31,7 +31,7 @@ app.get('/api/current', cors(corsOptions), async (req, res) => {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         },
-        referrerPolicy: 'same-origin'
+        // referrerPolicy: 'same-origin'
     }
     const response = await fetch(`${requestEndpoint}/new`, fetchOptions);
     const jsonResponse = await response.json();
