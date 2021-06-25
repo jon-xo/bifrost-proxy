@@ -12,6 +12,16 @@ const corsOptions = {
     origin: "*"
 };
 
+const getFetchOptions = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json, text/plain, */*',
+        Connection: 'keep-alive'
+    },
+    referrerPolicy: 'no-referrer'
+}
+
 // Comic Release API Endpoint
 const requestEndpoint = "https://api.shortboxed.com/comics/v1";
 
@@ -47,16 +57,7 @@ app.get('/api/current', async (req, res) => {
 // comic releases.
 app.get('/api/upcoming', cors(corsOptions), async (req, res) => {
     try {
-    const fetchOptions = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json, text/plain, */*',
-            Connection: 'keep-alive'
-        },
-        referrerPolicy: 'no-referrer'
-    }
-    const response = await fetch(`${requestEndpoint}/future`, fetchOptions);
+    const response = await fetch(`${requestEndpoint}/future`, getFetchOptions);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
@@ -69,16 +70,7 @@ app.get('/api/upcoming', cors(corsOptions), async (req, res) => {
 // comic releases.
 app.get('/api/previous', cors(corsOptions), async (req, res) => {
     try {
-    const fetchOptions = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json, text/plain, */*',
-            Connection: 'keep-alive'
-        },
-        referrerPolicy: 'no-referrer'
-    }
-    const response = await fetch(`${requestEndpoint}/previous`, fetchOptions);
+    const response = await fetch(`${requestEndpoint}/previous`, getFetchOptions);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
