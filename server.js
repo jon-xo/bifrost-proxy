@@ -16,9 +16,9 @@ const getFetchOptions = {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
-        accept: 'application/json, text/plain, */*',
-        Connection: 'keep-alive'
+        accept: 'application/json, text/plain, */*'
     },
+    keepalive: true,
     referrerPolicy: 'no-referrer'
 }
 
@@ -61,7 +61,7 @@ app.get('/api/upcoming', cors(corsOptions), async (req, res) => {
 // comic releases.
 app.get('/api/previous', async (req, res) => {
     try {
-    const response = await fetch(`${requestEndpoint}/previous`);
+    const response = await fetch(`${requestEndpoint}/previous`, getFetchOptions);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
