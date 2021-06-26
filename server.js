@@ -19,7 +19,7 @@ const getFetchOptions = {
         accept: 'application/json, text/plain, */*'
     },
     keepalive: true,
-    referrerPolicy: 'no-referrer'
+    // referrerPolicy: 'no-referrer'
 }
 
 // Comic Release API Endpoint
@@ -59,7 +59,7 @@ app.get('/api/upcoming', async (req, res) => {
 // This function runs if the http://localhost:5000/previous endpoint
 // receives a HTTP GET request. API returns list of last week's
 // comic releases.
-app.get('/api/previous', async (req, res) => {
+app.get('/api/previous', cors(corsOptions), async (req, res) => {
     try {
     const response = await fetch(`${requestEndpoint}/previous`, getFetchOptions);
     const jsonResponse = await response.json();
