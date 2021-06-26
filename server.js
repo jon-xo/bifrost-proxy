@@ -61,7 +61,7 @@ app.get('/api/upcoming', async (req, res) => {
 // comic releases.
 app.get('/api/previous', cors(corsOptions), async (req, res) => {
     try {
-    const response = await fetch(`${requestEndpoint}/previous`, getFetchOptions);
+    const response = await fetch(`${requestEndpoint}/previous`);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
