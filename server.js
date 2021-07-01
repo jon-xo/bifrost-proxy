@@ -4,7 +4,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 
 // Detect dynamic port assigned by Heroku
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
@@ -26,7 +26,7 @@ const getFetchOptions = {
 const requestEndpoint = "https://api.shortboxed.com/comics/v1";
 
 // ComicVine API Endpoint
-const searchEndpoint = "https://www.comicvine.com/api"
+const searchEndpoint = "https://comicvine.gamespot.com/api"
 
 const apiCvKey = process.env.REACT_APP_COMIC_API_KEY;
 
@@ -78,7 +78,21 @@ app.get('/api/search/issues/:query', cors(corsOptions), async (req, res) => {
     //     },
     //     referrerPolicy: 'same-origin'
     // }
-    const response = await fetch(`${searchEndpoint}/issues/?api_key=${apiCvKey}&filter=name:${req.params.query}&format=json`, getFetchOptions);
+    // Search Exmaple: https://comicvine.gamespot.com/api/search/?api_key=CV_KEY&format=json&sort=name:asc&resources=issue&query=%22Master%20of%20kung%20fu%22
+    // const response = await fetch(`${searchEndpoint}/issues/?api_key=${apiCvKey}&filter=name:${req.params.query}&format=json`, getFetchOptions);
+    const response = await fetch(`${searchEndpoint}/search/?api_key=${apiCvKey}&format=json&sort=cover_date:desc&resources=issue&query=${encodeURI(req.params.query)}`, getFetchOptions);
+    const jsonResponse = await response.json();
+     res.json(jsonResponse);
+    } catch (err) {
+        console.log(`Error Message: ${err}`);
+    }
+});
+
+app.get('/api/search/volumes/:query', cors(corsOptions), async (req, res) => {
+    try {
+    // Search Exmaple: https://comicvine.gamespot.com/api/search/?api_key=CV_KEY&format=json&sort=name:asc&resources=issue&query=%22Master%20of%20kung%20fu%22
+    // const response = await fetch(`${searchEndpoint}/issues/?api_key=${apiCvKey}&filter=name:${req.params.query}&format=json`, getFetchOptions);
+    const response = await fetch(`${searchEndpoint}/search/?api_key=${apiCvKey}&format=json&sort=cover_date:desc&resources=volume&query=${encodeURI(req.params.query)}`, getFetchOptions);
     const jsonResponse = await response.json();
      res.json(jsonResponse);
     } catch (err) {
